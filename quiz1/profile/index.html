@@ -10,77 +10,235 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
+        /* --- SCROLL ANIMATION CSS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* --- PAGE TRANSITION CSS --- */
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOutPage {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        body.fade-in {
+            animation: fadeInPage 0.5s ease-in-out forwards;
+        }
+        body.fade-out {
+            animation: fadeOutPage 0.5s ease-in-out forwards;
+        }
+
+        /* --- ACCORDION PANEL CSS (IMPROVED) --- */
+        .accordion-panel {
+            flex: 1;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: flex 0.7s ease-in-out; /* Panel size transition */
+        }
+        .accordion-panel.active {
+            flex: 5;
+        }
+        
+        /* The overlay containing the text content */
+        .panel-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            /* Fades out almost instantly to prevent text wrapping */
+            transition: opacity 0.1s ease-in-out;
+        }
+        
+        /* When panel is active, the overlay becomes visible */
+        .accordion-panel.active .panel-overlay {
+            opacity: 1;
+            /* Fades in after a longer delay, ensuring the panel is wide enough */
+            transition: opacity 0.3s ease-in-out 0.4s;
+        }
+
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen fade-in">
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md">
+    <!-- Sticky Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-7">
-                    <div>
-                        <!-- Website Logo -->
-                        <a href="/quiz1/" class="flex items-center py-4 px-2">
-                            <span class="font-semibold text-gray-500 text-lg">My Website</span>
-                        </a>
+            <div class="flex justify-between items-center">
+                 <!-- Left Side: Logo + Links -->
+                 <div class="flex items-center space-x-2">
+                    <!-- Logo -->
+                    <a href="/quiz1/" class="flex items-center py-4 px-2">
+                        <span class="font-semibold text-gray-500 text-lg">Melvan's</span>
+                    </a>
+                    <!-- Links -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="/quiz1/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#a6c0fe] transition duration-300">Home</a>
+                        <a href="/quiz1/profile/" class="py-4 px-2 text-[#a6c0fe] border-b-4 border-[#a6c0fe] font-semibold">Profile</a>
+                        <a href="/quiz1/hometown/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#f68084] transition duration-300">Hometown</a>
+                        <a href="/quiz1/food/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#96e6a1] transition duration-300">Local Food</a>
+                        <a href="/quiz1/tourist/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#fbc7d4] transition duration-300">Tourist Places</a>
                     </div>
-                </div>
-                <!-- Primary Navbar items -->
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="/quiz1/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Home</a>
-                    <a href="/quiz1/profile/" class="py-4 px-2 text-blue-500 border-b-4 border-blue-500 font-semibold">Profile</a>
-                    <a href="/quiz1/hometown/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Hometown</a>
-                    <a href="/quiz1/food/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Local Food</a>
-                    <a href="/quiz1/tourist/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Tourist Places</a>
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
                     <button class="outline-none mobile-menu-button">
-                    <svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 "
-                        x-show="!showMenu"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
+                    <svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 " fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                     </button>
                 </div>
             </div>
         </div>
-        <!-- mobile menu -->
         <div class="hidden mobile-menu">
             <ul class="">
-                <li><a href="/quiz1/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Home</a></li>
-                <li class="active"><a href="/quiz1/profile/" class="block text-sm px-2 py-4 text-white bg-blue-500 font-semibold">Profile</a></li>
-                <li><a href="/quiz1/hometown/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Hometown</a></li>
-                <li><a href="/quiz1/food/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Local Food</a></li>
-                <li><a href="/quiz1/tourist/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Tourist Places</a></li>
+                <li><a href="/quiz1/" class="block text-sm px-2 py-4 hover:bg-[#a6c0fe] transition duration-300">Home</a></li>
+                <li class="active"><a href="/quiz1/profile/" class="block text-sm px-2 py-4 text-white bg-[#a6c0fe] font-semibold">Profile</a></li>
+                <li><a href="/quiz1/hometown/" class="block text-sm px-2 py-4 hover:bg-[#f68084] transition duration-300">Hometown</a></li>
+                <li><a href="/quiz1/food/" class="block text-sm px-2 py-4 hover:bg-[#96e6a1] transition duration-300">Local Food</a></li>
+                <li><a href="/quiz1/tourist/" class="block text-sm px-2 py-4 hover:bg-[#fbc7d4] transition duration-300">Tourist Places</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Content -->
-    <div class="max-w-6xl mx-auto px-4 py-8">
-        <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h1 class="text-4xl font-bold mb-4">About Me</h1>
-            <div class="flex flex-col md:flex-row items-center">
-                <img src="https://placehold.co/150x150/E2E8F0/333333?text=Me" alt="Profile Picture" class="rounded-full h-36 w-36 md:mr-8 mb-4 md:mb-0">
-                <p class="text-lg text-gray-600">This is the profile page. Here you can write a little bit about yourself. Talk about your hobbies, your skills, or anything else you'd like to share. This is just placeholder text to show how the page would look.</p>
+    <div class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+        <div class="bg-white p-8 rounded-lg shadow-lg h-full flex flex-col relative overflow-hidden">
+            <!-- Decorative Background -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#a6c0fe] to-transparent opacity-10 -translate-y-1/2 translate-x-1/2 transform rotate-45 rounded-full pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <!-- Profile Header -->
+                <div class="text-center mb-8 animate-on-scroll">
+                    <img src="/Photo of me.png" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto mb-4">
+                    <h1 class="text-4xl font-bold">About Me</h1>
+                    <p class="text-lg text-gray-600">A 3rd year student at Informatics ITS</p>
+                </div>
+
+                <!-- Interactive Accordion Section -->
+                <div id="accordion-container" class="w-full h-96 flex space-x-4 animate-on-scroll" style="animation-delay: 0.2s;">
+
+                    <!-- Panel 1: Biodata (Active by default) -->
+                    <div class="accordion-panel active rounded-lg cursor-pointer relative overflow-hidden" style="background-image: url('https://media.istockphoto.com/id/2170578930/photo/about-me.jpg?s=612x612&w=0&k=20&c=rLsmKZUGN35N0u6me1QDbVi6q6ewvncCRhEprrXJe98=');">
+                        <div class="panel-overlay absolute inset-0 p-6 h-full w-full flex flex-col justify-center">
+                            <div class="panel-content text-white">
+                                <h3 class="text-3xl font-bold mb-4">Biography</h3>
+                                <ul class="list-disc list-inside space-y-2">
+                                    <li>Melvan Hapianan Allo Ponglabba</li>
+                                    <li>Born in Malang on 4th of May 2007</li>
+                                    <li>Has 2 Siblings, and im the youngest</li>
+                                    <li>Has been in malang since kindergarten all the way to highschool</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: Skills -->
+                    <div class="accordion-panel rounded-lg cursor-pointer relative overflow-hidden" style="background-image: url('https://www.mckinsey.com/~/media/mckinsey/mckinsey%20quarterly/the%20five%20fifty/soft-skills-1536x1536.png?mw=677&car=42:25');">
+                         <div class="panel-overlay absolute inset-0 p-6 h-full w-full flex flex-col justify-center">
+                            <div class="panel-content text-white">
+                                <h3 class="text-3xl font-bold mb-4">Skills</h3>
+                                <ul class="list-disc list-inside space-y-2">
+                                    <li>HTML & CSS</li>
+                                    <li>Basic Programming</li>
+                                    <li>Teaching</li>
+                                    <li>High adaptability</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: Hobbies -->
+                    <div class="accordion-panel rounded-lg cursor-pointer relative overflow-hidden" style="background-image: url('https://i.pinimg.com/736x/17/70/ec/1770ec99284e21c7ab592f088ff9e7bb.jpg');">
+                        <div class="panel-overlay absolute inset-0 p-6 h-full w-full flex flex-col justify-center">
+                            <div class="panel-content text-white">
+                                <h3 class="text-3xl font-bold mb-4">Hobbies</h3>
+                                <p>In my free time, I enjoy exploring creative arts, such as trying new games, watching new movies, crocheting a new doll, and many more.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 4: Contact -->
+                     <div class="accordion-panel rounded-lg cursor-pointer relative overflow-hidden" style="background-image: url('https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/06/what-is-a-contact-center.jpg?w=1024');">
+                        <div class="panel-overlay absolute inset-0 p-6 h-full w-full flex flex-col justify-center">
+                            <div class="panel-content text-white">
+                                <h3 class="text-3xl font-bold mb-4">Contact Me</h3>
+                                <p>You can reach out to me via:</p>
+                                <ul class="list-disc list-inside space-y-2">
+                                    <li>@_mel.mels on Insta</li>
+                                    <li>mechachungus@gmail.com on Gmail</li>
+                                    <li>+62 812 9847 8467 (Call me)</li>
+                                    <li>Melvan Hapianan on LinkedIn</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     
     <script>
+        // --- MOBILE MENU SCRIPT ---
         const btn = document.querySelector("button.mobile-menu-button");
         const menu = document.querySelector(".mobile-menu");
-
         btn.addEventListener("click", () => {
             menu.classList.toggle("hidden");
+        });
+
+        // --- SCROLL ANIMATION SCRIPT ---
+        const animatedElements = document.querySelectorAll(".animate-on-scroll");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        animatedElements.forEach((element) => {
+            observer.observe(element);
+        });
+
+        // --- ACCORDION PANEL SCRIPT ---
+        const panels = document.querySelectorAll('.accordion-panel');
+        panels.forEach(panel => {
+            panel.addEventListener('click', () => {
+                // First, remove active class from all panels
+                panels.forEach(p => p.classList.remove('active'));
+                // Then, add active class to the one that was clicked
+                panel.classList.add('active');
+            });
+        });
+
+        // --- PAGE TRANSITION SCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', e => {
+                    const href = link.getAttribute('href');
+                    const target = link.getAttribute('target');
+                    if (href && href.startsWith('/quiz1/') && target !== '_blank') {
+                        e.preventDefault();
+                        document.body.classList.add('fade-out');
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 500);
+                    }
+                });
+            });
         });
     </script>
 </body>

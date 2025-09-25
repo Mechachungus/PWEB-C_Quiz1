@@ -10,74 +10,213 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
+        /* --- SCROLL ANIMATION CSS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* --- PAGE TRANSITION CSS --- */
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOutPage {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        body.fade-in {
+            animation: fadeInPage 0.5s ease-in-out forwards;
+        }
+        body.fade-out {
+            animation: fadeOutPage 0.5s ease-in-out forwards;
+        }
+
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 fade-in">
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md">
+    <!-- Sticky Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-7">
-                    <div>
-                        <!-- Website Logo -->
-                        <a href="/quiz1/" class="flex items-center py-4 px-2">
-                            <span class="font-semibold text-gray-500 text-lg">My Website</span>
-                        </a>
+             <div class="flex justify-between items-center">
+                <!-- Left Side: Logo + Links -->
+                <div class="flex items-center space-x-2">
+                    <!-- Logo -->
+                    <a href="/quiz1/" class="flex items-center py-4 px-2">
+                        <span class="font-semibold text-gray-500 text-lg">Melvan's</span>
+                    </a>
+                    <!-- Links -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="/quiz1/" class="py-4 px-2 text-[#a6c0fe] border-b-4 border-[#a6c0fe] font-semibold">Home</a>
+                        <a href="/quiz1/profile/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#a6c0fe] transition duration-300">Profile</a>
+                        <a href="/quiz1/hometown/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#f68084] transition duration-300">Hometown</a>
+                        <a href="/quiz1/food/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#96e6a1] transition duration-300">Local Food</a>
+                        <a href="/quiz1/tourist/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#fbc7d4] transition duration-300">Tourist Places</a>
                     </div>
-                </div>
-                <!-- Primary Navbar items -->
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="/quiz1/" class="py-4 px-2 text-blue-500 border-b-4 border-blue-500 font-semibold">Home</a>
-                    <a href="/quiz1/profile/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Profile</a>
-                    <a href="/quiz1/hometown/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Hometown</a>
-                    <a href="/quiz1/food/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Local Food</a>
-                    <a href="/quiz1/tourist/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Tourist Places</a>
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
                     <button class="outline-none mobile-menu-button">
-                    <svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 "
-                        x-show="!showMenu"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
+                    <svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 " fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                     </button>
                 </div>
             </div>
         </div>
-        <!-- mobile menu -->
         <div class="hidden mobile-menu">
             <ul class="">
-                <li class="active"><a href="/quiz1/" class="block text-sm px-2 py-4 text-white bg-blue-500 font-semibold">Home</a></li>
-                <li><a href="/quiz1/profile/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Profile</a></li>
-                <li><a href="/quiz1/hometown/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Hometown</a></li>
-                <li><a href="/quiz1/food/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Local Food</a></li>
-                <li><a href="/quiz1/tourist/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Tourist Places</a></li>
+                <li class="active"><a href="/quiz1/" class="block text-sm px-2 py-4 text-white bg-[#a6c0fe] font-semibold">Home</a></li>
+                <li><a href="/quiz1/profile/" class="block text-sm px-2 py-4 hover:bg-[#a6c0fe] transition duration-300">Profile</a></li>
+                <li><a href="/quiz1/hometown/" class="block text-sm px-2 py-4 hover:bg-[#f68084] transition duration-300">Hometown</a></li>
+                <li><a href="/quiz1/food/" class="block text-sm px-2 py-4 hover:bg-[#96e6a1] transition duration-300">Local Food</a></li>
+                <li><a href="/quiz1/tourist/" class="block text-sm px-2 py-4 hover:bg-[#fbc7d4] transition duration-300">Tourist Places</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Content -->
-    <div class="max-w-6xl mx-auto px-4 py-8">
-        <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h1 class="text-4xl font-bold mb-4">Welcome to My Website!</h1>
-            <p class="text-lg text-gray-600">This is the homepage of my personal website project. Use the navigation bar above to explore the other pages.</p>
+    <!-- Hero Section -->
+    <header class="h-screen bg-cover bg-center flex items-center justify-center text-white relative" style="background-image: url('https://images.squarespace-cdn.com/content/v1/551dfbb6e4b06a5b2a85e190/1632186041096-I6LNGVBQWLDYBR65URV8/iStock-534134538.jpg');">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="text-center z-10 animate-on-scroll is-visible">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">Welcome to Melvan's Website</h1>
+            <p class="text-xl md:text-2xl">Find out about me, one page at a time</p>
         </div>
-    </div>
+    </header>
+
+    <!-- Content Section -->
+    <main class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-4 relative overflow-hidden">
+             <!-- Decorative Backgrounds -->
+            <div class="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-[#a6c0fe] to-transparent opacity-10 -translate-y-1/2 -translate-x-1/2 transform rotate-12 rounded-full pointer-events-none"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[#a6c0fe] to-transparent opacity-10 translate-y-1/2 translate-x-1/2 transform rotate-45 rounded-full pointer-events-none"></div>
+            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-tr from-[#a6c0fe] to-transparent opacity-5 -translate-y-1/2 -translate-x-1/2 transform rotate-20 rounded-full pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <div class="text-center mb-12 animate-on-scroll">
+                    <h2 class="text-4xl font-bold">Interested About My?</h2>
+                    <p class="text-lg text-gray-600 mt-2">Discover more about me and my interests.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+                    <!-- Profile Card -->
+                    <a href="/quiz1/profile/" class="block group animate-on-scroll" style="animation-delay: 0.2s;">
+                        <div class="relative rounded-lg shadow-lg overflow-hidden transform group-hover:-translate-y-2 transition-transform duration-300">
+                           <img src="/Photo of me.png" alt="Profile" class="w-full h-48 object-cover">
+                           <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                           <div class="absolute bottom-0 left-0 p-6">
+                                <div class="relative">
+                                    <div class="absolute inset-0 bg-[#a6c0fe] opacity-20 rounded-lg transform -rotate-1"></div>
+                                    <div class="relative bg-white/70 backdrop-blur-sm p-4 rounded-lg shadow-md">
+                                        <h3 class="text-2xl font-semibold text-gray-800">Self</h3>
+                                    </div>
+                                </div>
+                           </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Hometown Card -->
+                    <a href="/quiz1/hometown/" class="block group animate-on-scroll" style="animation-delay: 0.4s;">
+                        <div class="relative rounded-lg shadow-lg overflow-hidden transform group-hover:-translate-y-2 transition-transform duration-300">
+                            <img src="https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/81/2025/08/01/tugu-malang-2188140920-880525526.jpg" alt="Hometown" class="w-full h-48 object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <div class="relative">
+                                    <div class="absolute inset-0 bg-[#f68084] opacity-20 rounded-lg transform rotate-1"></div>
+                                    <div class="relative bg-white/70 backdrop-blur-sm p-4 rounded-lg shadow-md">
+                                        <h3 class="text-2xl font-semibold text-gray-800">Hometown</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Food Card -->
+                    <a href="/quiz1/food/" class="block group animate-on-scroll" style="animation-delay: 0.6s;">
+                        <div class="relative rounded-lg shadow-lg overflow-hidden transform group-hover:-translate-y-2 transition-transform duration-300">
+                            <img src="https://images.tokopedia.net/img/KRMmCm/2022/6/7/3a1e1a71-2a09-4fb8-8a5d-0d6bd6c24183.jpg" alt="Local Food" class="w-full h-48 object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <div class="relative">
+                                    <div class="absolute inset-0 bg-[#96e6a1] opacity-20 rounded-lg transform -rotate-1"></div>
+                                    <div class="relative bg-white/70 backdrop-blur-sm p-4 rounded-lg shadow-md">
+                                        <h3 class="text-2xl font-semibold text-gray-800">Local Food</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Tourist Card -->
+                     <a href="/quiz1/tourist/" class="block group animate-on-scroll" style="animation-delay: 0.8s;">
+                        <div class="relative rounded-lg shadow-lg overflow-hidden transform group-hover:-translate-y-2 transition-transform duration-300">
+                            <img src="https://gelorajatim.com/wp-content/uploads/2024/08/IMG-20240828-WA0020-scaled.jpg" alt="Tourist Places" class="w-full h-48 object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                               <div class="relative">
+                                    <div class="absolute inset-0 bg-[#fbc7d4] opacity-20 rounded-lg transform rotate-1"></div>
+                                    <div class="relative bg-white/70 backdrop-blur-sm p-4 rounded-lg shadow-md">
+                                        <h3 class="text-2xl font-semibold text-gray-800">Tourist Places</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
     
     <script>
+        // --- MOBILE MENU SCRIPT ---
         const btn = document.querySelector("button.mobile-menu-button");
         const menu = document.querySelector(".mobile-menu");
-
         btn.addEventListener("click", () => {
             menu.classList.toggle("hidden");
+        });
+
+        // --- SCROLL ANIMATION SCRIPT ---
+        const animatedElements = document.querySelectorAll(".animate-on-scroll");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        animatedElements.forEach((element) => {
+            observer.observe(element);
+        });
+
+        // --- PAGE TRANSITION SCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', e => {
+                    const href = link.getAttribute('href');
+                    const target = link.getAttribute('target');
+                    // Only apply to internal links that don't open in a new tab
+                    if (href && href.startsWith('/quiz1/') && target !== '_blank') {
+                        e.preventDefault();
+                        document.body.classList.add('fade-out');
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 500);
+                    }
+                });
+            });
         });
     </script>
 </body>

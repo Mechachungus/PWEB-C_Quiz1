@@ -10,80 +10,156 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
+        /* --- SCROLL ANIMATION CSS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* --- PAGE TRANSITION CSS --- */
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOutPage {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        body.fade-in {
+            animation: fadeInPage 0.5s ease-in-out forwards;
+        }
+        body.fade-out {
+            animation: fadeOutPage 0.5s ease-in-out forwards;
+        }
+
+        /* --- EXPANDABLE CARD CSS (IMPROVED) --- */
+        .tourist-card .card-content .description {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, margin-top 0.5s ease-in-out;
+            margin-top: 0;
+        }
+        .tourist-card.expanded .card-content .description {
+            max-height: 500px; /* A large value to ensure all content is visible */
+            opacity: 1;
+            margin-top: 0.5rem; /* Add space between title and text when expanded */
+        }
+        .tourist-card .card-image img {
+            transition: transform 0.5s ease-in-out;
+        }
+        .tourist-card.expanded .card-image img {
+            transform: scale(1.05);
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen fade-in">
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md">
+    <!-- Sticky Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-7">
-                    <div>
-                        <!-- Website Logo -->
-                        <a href="/quiz1/" class="flex items-center py-4 px-2">
-                            <span class="font-semibold text-gray-500 text-lg">My Website</span>
-                        </a>
+             <div class="flex justify-between items-center">
+                <!-- Left Side: Logo + Links -->
+                <div class="flex items-center space-x-2">
+                    <!-- Logo -->
+                    <a href="/quiz1/" class="flex items-center py-4 px-2">
+                        <span class="font-semibold text-gray-500 text-lg">Melvan's</span>
+                    </a>
+                    <!-- Links -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="/quiz1/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#a6c0fe] transition duration-300">Home</a>
+                        <a href="/quiz1/profile/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#a6c0fe] transition duration-300">Profile</a>
+                        <a href="/quiz1/hometown/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#f68084] transition duration-300">Hometown</a>
+                        <a href="/quiz1/food/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#96e6a1] transition duration-300">Local Food</a>
+                        <a href="/quiz1/tourist/" class="py-4 px-2 text-[#fbc7d4] border-b-4 border-[#fbc7d4] font-semibold">Tourist Places</a>
                     </div>
-                </div>
-                <!-- Primary Navbar items -->
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="/quiz1/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Home</a>
-                    <a href="/quiz1/profile/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Profile</a>
-                    <a href="/quiz1/hometown/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Hometown</a>
-                    <a href="/quiz1/food/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Local Food</a>
-                    <a href="/quiz1/tourist/" class="py-4 px-2 text-blue-500 border-b-4 border-blue-500 font-semibold">Tourist Places</a>
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
                     <button class="outline-none mobile-menu-button">
-                    <svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 "
-                        x-show="!showMenu"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
+                    <svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 " fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                     </button>
                 </div>
             </div>
         </div>
-        <!-- mobile menu -->
         <div class="hidden mobile-menu">
             <ul class="">
-                <li><a href="/quiz1/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Home</a></li>
-                <li><a href="/quiz1/profile/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Profile</a></li>
-                <li><a href="/quiz1/hometown/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Hometown</a></li>
-                <li><a href="/quiz1/food/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Local Food</a></li>
-                <li class="active"><a href="/quiz1/tourist/" class="block text-sm px-2 py-4 text-white bg-blue-500 font-semibold">Tourist Places</a></li>
+                <li><a href="/quiz1/" class="block text-sm px-2 py-4 hover:bg-[#a6c0fe] transition duration-300">Home</a></li>
+                <li><a href="/quiz1/profile/" class="block text-sm px-2 py-4 hover:bg-[#a6c0fe] transition duration-300">Profile</a></li>
+                <li><a href="/quiz1/hometown/" class="block text-sm px-2 py-4 hover:bg-[#f68084] transition duration-300">Hometown</a></li>
+                <li><a href="/quiz1/food/" class="block text-sm px-2 py-4 hover:bg-[#96e6a1] transition duration-300">Local Food</a></li>
+                <li class="active"><a href="/quiz1/tourist/" class="block text-sm px-2 py-4 text-white bg-[#fbc7d4] font-semibold">Tourist Places</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Content -->
-    <div class="max-w-6xl mx-auto px-4 py-8">
-        <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h1 class="text-4xl font-bold mb-4">Tourist Attractions</h1>
-            <p class="text-lg text-gray-600 mb-6">Explore the beautiful tourist spots in my hometown.</p>
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Tourist Spot 1 -->
-                <div class="bg-gray-50 rounded-lg shadow-md">
-                    <img src="https://placehold.co/600x400/E2E8F0/333333?text=Place+1" alt="Tourist Spot 1" class="rounded-t-lg w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Famous Landmark</h3>
-                        <p class="text-gray-600">Description of the tourist attraction. Mention what makes it a must-visit place. This is placeholder text for the description.</p>
-                    </div>
+    <div class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+        <div class="bg-white p-8 rounded-lg shadow-lg h-full relative overflow-hidden">
+            <!-- Decorative Backgrounds -->
+            <div class="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-[#fbc7d4] to-transparent opacity-10 -translate-y-1/2 -translate-x-1/2 transform rotate-12 rounded-full pointer-events-none"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[#fbc7d4] to-transparent opacity-10 translate-y-1/2 translate-x-1/2 transform rotate-45 rounded-full pointer-events-none"></div>
+            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-tr from-[#fbc7d4] to-transparent opacity-5 -translate-y-1/2 -translate-x-1/2 transform rotate-20 rounded-full pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="text-center mb-12 animate-on-scroll">
+                    <h1 class="text-4xl font-bold">Tourist Attractions</h1>
+                    <p class="text-lg text-gray-600">Here are some beautiful and popular tourist spots in Malang. Click a card to learn more.</p>
                 </div>
-                 <!-- Tourist Spot 2 -->
-                 <div class="bg-gray-50 rounded-lg shadow-md">
-                    <img src="https://placehold.co/600x400/E2E8F0/333333?text=Place+2" alt="Tourist Spot 2" class="rounded-t-lg w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-2xl font-semibold mb-2">Beautiful Park</h3>
-                        <p class="text-gray-600">Description of the tourist attraction. Mention what makes it a must-visit place. This is placeholder text for the description.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 items-start">
+                    <!-- Card 1 -->
+                    <div class="tourist-card bg-gray-50 rounded-lg shadow-lg overflow-hidden cursor-pointer animate-on-scroll" style="animation-delay: 0.2s;">
+                        <div class="card-image overflow-hidden h-64">
+                            <img src="https://gelorajatim.com/wp-content/uploads/2024/08/IMG-20240828-WA0020-scaled.jpg" alt="Tourist Spot 1" class="w-full h-full object-cover">
+                        </div>
+                        <div class="card-content p-6">
+                            <h3 class="text-2xl font-semibold">Mt. Bromo</h3>
+                            <p class="description text-gray-600">Mount Bromo is one of East Java’s most famous natural attractions, located near Malang. Known for its breathtaking sunrise views, sea of sand, and active volcanic crater, it offers a truly unique landscape that feels otherworldly and unforgettable for visitors. Many travelers also enjoy cultural experiences with the local Tenggerese people, who consider the mountain sacred.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="tourist-card bg-gray-50 rounded-lg shadow-lg overflow-hidden cursor-pointer animate-on-scroll" style="animation-delay: 0.4s;">
+                        <div class="card-image overflow-hidden h-64">
+                            <img src="https://asset.kompas.com/crops/GlHp3UWMnkhzaDXvQggyQRxM4ic=/0x0:1000x667/1200x800/data/photo/2020/01/13/5e1c15c61bc19.jpg" alt="Tourist Spot 2" class="w-full h-full object-cover">
+                        </div>
+                        <div class="card-content p-6">
+                            <h3 class="text-2xl font-semibold">Museum Angkut</h3>
+                            <p class="description text-gray-600">Museum Angkut in Malang is a unique transportation-themed museum that showcases vehicles from different eras and countries. With its immersive displays and life-sized sets, it feels like traveling through time and across the world. It’s a fun mix of education and entertainment, making it a favorite spot for both families and tourists.</p>
+                        </div>
+                    </div>
+
+                     <!-- Card 3 -->
+                    <div class="tourist-card bg-gray-50 rounded-lg shadow-lg overflow-hidden cursor-pointer animate-on-scroll" style="animation-delay: 0.6s;">
+                        <div class="card-image overflow-hidden h-64">
+                            <img src="https://nagantour.com/wp-content/uploads/2023/12/jatim-park-3-1.webp" alt="Tourist Spot 3" class="w-full h-full object-cover">
+                        </div>
+                        <div class="card-content p-6">
+                            <h3 class="text-2xl font-semibold">Jatim Park 3</h3>
+                            <p class="description text-gray-600">Jatim Park 3 in Malang is a family-friendly theme park famous for its dinosaur-themed attractions and interactive rides. Visitors can explore life-sized prehistoric replicas, fun playgrounds, and modern entertainment zones. It combines education and leisure, making it an exciting destination for all ages.</p>
+                        </div>
+                    </div>
+
+                     <!-- Card 4 -->
+                    <div class="tourist-card bg-gray-50 rounded-lg shadow-lg overflow-hidden cursor-pointer animate-on-scroll" style="animation-delay: 0.8s;">
+                        <div class="card-image overflow-hidden h-64">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqetIEDcD_tD2Edt5fetsJMBKMU9kenLlG1A&s" alt="Tourist Spot 4" class="w-full h-full object-cover">
+                        </div>
+                        <div class="card-content p-6">
+                            <h3 class="text-2xl font-semibold">Kampung Warna Warni</h3>
+                            <p class="description text-gray-600">Kampung Warna Warni in Malang is a vibrant riverside village transformed with brightly painted houses and colorful murals. Walking through its alleys feels lively and full of charm, perfect for photos and cultural exploration. It has become a symbol of community creativity and a must-visit spot for tourists.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,11 +167,62 @@
     </div>
     
     <script>
+        // --- MOBILE MENU SCRIPT ---
         const btn = document.querySelector("button.mobile-menu-button");
         const menu = document.querySelector(".mobile-menu");
-
         btn.addEventListener("click", () => {
             menu.classList.toggle("hidden");
+        });
+
+        // --- SCROLL ANIMATION SCRIPT ---
+        const animatedElements = document.querySelectorAll(".animate-on-scroll");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        animatedElements.forEach((element) => {
+            observer.observe(element);
+        });
+
+        // --- EXPANDABLE CARD SCRIPT ---
+        const cards = document.querySelectorAll('.tourist-card');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Check if the clicked card is already expanded
+                const isExpanded = card.classList.contains('expanded');
+                
+                // First, remove 'expanded' from all cards
+                cards.forEach(c => c.classList.remove('expanded'));
+
+                // If the card was not already expanded, expand it
+                if (!isExpanded) {
+                    card.classList.add('expanded');
+                }
+            });
+        });
+
+        // --- PAGE TRANSITION SCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', e => {
+                    const href = link.getAttribute('href');
+                    const target = link.getAttribute('target');
+                    if (href && href.startsWith('/quiz1/') && target !== '_blank') {
+                        e.preventDefault();
+                        document.body.classList.add('fade-out');
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 500);
+                    }
+                });
+            });
         });
     </script>
 </body>

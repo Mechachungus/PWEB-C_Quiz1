@@ -10,75 +10,202 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
+        /* --- SCROLL ANIMATION CSS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* --- PAGE TRANSITION CSS --- */
+        @keyframes fadeInPage {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOutPage {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        body.fade-in {
+            animation: fadeInPage 0.5s ease-in-out forwards;
+        }
+        body.fade-out {
+            animation: fadeOutPage 0.5s ease-in-out forwards;
+        }
+
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen fade-in">
 
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md">
+    <!-- Sticky Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between">
-                <div class="flex space-x-7">
-                    <div>
-                        <!-- Website Logo -->
-                        <a href="/quiz1/" class="flex items-center py-4 px-2">
-                            <span class="font-semibold text-gray-500 text-lg">My Website</span>
-                        </a>
+            <div class="flex justify-between items-center">
+                <!-- Left Side: Logo + Links -->
+                <div class="flex items-center space-x-2">
+                    <!-- Logo -->
+                    <a href="/quiz1/" class="flex items-center py-4 px-2">
+                        <span class="font-semibold text-gray-500 text-lg">Melvan's</span>
+                    </a>
+                    <!-- Links -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="/quiz1/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#a6c0fe] transition duration-300">Home</a>
+                        <a href="/quiz1/profile/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#a6c0fe] transition duration-300">Profile</a>
+                        <a href="/quiz1/hometown/" class="py-4 px-2 text-[#f68084] border-b-4 border-[#f68084] font-semibold">Hometown</a>
+                        <a href="/quiz1/food/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#96e6a1] transition duration-300">Local Food</a>
+                        <a href="/quiz1/tourist/" class="py-4 px-2 text-gray-500 font-semibold hover:text-[#fbc7d4] transition duration-300">Tourist Places</a>
                     </div>
-                </div>
-                <!-- Primary Navbar items -->
-                <div class="hidden md:flex items-center space-x-1">
-                    <a href="/quiz1/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Home</a>
-                    <a href="/quiz1/profile/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Profile</a>
-                    <a href="/quiz1/hometown/" class="py-4 px-2 text-blue-500 border-b-4 border-blue-500 font-semibold">Hometown</a>
-                    <a href="/quiz1/food/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Local Food</a>
-                    <a href="/quiz1/tourist/" class="py-4 px-2 text-gray-500 font-semibold hover:text-blue-500 transition duration-300">Tourist Places</a>
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
                     <button class="outline-none mobile-menu-button">
-                    <svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 "
-                        x-show="!showMenu"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
+                    <svg class=" w-6 h-6 text-gray-500 hover:text-blue-500 " fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                     </button>
                 </div>
             </div>
         </div>
-        <!-- mobile menu -->
         <div class="hidden mobile-menu">
             <ul class="">
-                <li><a href="/quiz1/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Home</a></li>
-                <li><a href="/quiz1/profile/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Profile</a></li>
-                <li class="active"><a href="/quiz1/hometown/" class="block text-sm px-2 py-4 text-white bg-blue-500 font-semibold">Hometown</a></li>
-                <li><a href="/quiz1/food/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Local Food</a></li>
-                <li><a href="/quiz1/tourist/" class="block text-sm px-2 py-4 hover:bg-blue-500 transition duration-300">Tourist Places</a></li>
+                <li><a href="/quiz1/" class="block text-sm px-2 py-4 hover:bg-[#a6c0fe] transition duration-300">Home</a></li>
+                <li><a href="/quiz1/profile/" class="block text-sm px-2 py-4 hover:bg-[#a6c0fe] transition duration-300">Profile</a></li>
+                <li class="active"><a href="/quiz1/hometown/" class="block text-sm px-2 py-4 text-white bg-[#f68084] font-semibold">Hometown</a></li>
+                <li><a href="/quiz1/food/" class="block text-sm px-2 py-4 hover:bg-[#96e6a1] transition duration-300">Local Food</a></li>
+                <li><a href="/quiz1/tourist/" class="block text-sm px-2 py-4 hover:bg-[#fbc7d4] transition duration-300">Tourist Places</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Content -->
-    <div class="max-w-6xl mx-auto px-4 py-8">
-        <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h1 class="text-4xl font-bold mb-4">My Hometown</h1>
-            <img src="https://placehold.co/800x400/E2E8F0/333333?text=Hometown+Image" alt="Hometown" class="rounded-lg w-full mb-4">
-            <p class="text-lg text-gray-600">This page is dedicated to my hometown. You can write a brief description here. Talk about its history, its culture, or what makes it special to you. This is placeholder content to show how you might structure this page.</p>
+    <div class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full">
+        <div class="bg-white p-8 rounded-lg shadow-lg h-full relative overflow-hidden">
+            <!-- Decorative Backgrounds -->
+            <div class="absolute top-0 left-0 w-80 h-80 bg-gradient-to-br from-[#f68084] to-transparent opacity-10 -translate-y-1/2 -translate-x-1/2 transform rotate-12 rounded-full pointer-events-none"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-[#f68084] to-transparent opacity-10 translate-y-1/2 translate-x-1/2 transform rotate-45 rounded-full pointer-events-none"></div>
+            <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-tr from-[#f68084] to-transparent opacity-5 -translate-y-1/2 -translate-x-1/2 transform rotate-20 rounded-full pointer-events-none"></div>
+            
+            <div class="relative z-10">
+                <div class="text-center mb-8 animate-on-scroll">
+                    <h1 class="text-4xl font-bold">My Hometown</h1>
+                    <p class="text-lg text-gray-600">A gallery of places from where I grew up.</p>
+                </div>
+
+                <!-- Image Slider -->
+                <div id="slider" class="relative w-full h-96 rounded-lg overflow-hidden shadow-lg animate-on-scroll" style="animation-delay: 0.2s;">
+                    <!-- Slides -->
+                    <div class="slider-item absolute inset-0 transition-opacity duration-700 ease-in-out">
+                        <img src="https://i.ytimg.com/vi/ATS_cDPuVus/maxresdefault.jpg" alt="City View 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="slider-item absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0">
+                        <img src="https://cdn.masuksini.com/image/large/mengenal%20sejarah%20kota%20malang.jpg" alt="City View 2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="slider-item absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0">
+                        <img src="https://cdn1-production-images-kly.akamaized.net/qbCN-Bi968FD1ssHA2gN3g6aBbc=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/1461695/original/081579000_1483594907-20170105-Perkampungan-Malang-Gholib1.jpg" alt="City View 3" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Slider Controls -->
+                    <button id="prevBtn" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-75 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button id="nextBtn" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2 hover:bg-opacity-75 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Explanation Text -->
+                <div class="mt-12 animate-on-scroll" style="animation-delay: 0.4s;">
+                     <div class="relative">
+                        <div class="absolute inset-0 bg-[#f68084] opacity-20 rounded-lg transform -rotate-1"></div>
+                        <div class="relative bg-white/70 backdrop-blur-sm p-8 rounded-lg shadow-md">
+                            <h2 class="text-3xl font-bold mb-4 text-gray-800">Malang</h2>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                Malang is a cool and charming city in East Java, Indonesia, known for its pleasant climate, colonial architecture, and rich cultural heritage, but most importantly it's where I grew up. Surrounded by mountains and tea plantations, it offers a mix of natural beauty, historical sites, and modern attractions. From delicious local cuisine like Bakso Malang to popular destinations such as Mount Bromo, Jatim Park, and colorful villages, Malang is a favorite getaway for both local and international travelers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
     <script>
+        // --- MOBILE MENU SCRIPT ---
         const btn = document.querySelector("button.mobile-menu-button");
         const menu = document.querySelector(".mobile-menu");
-
         btn.addEventListener("click", () => {
             menu.classList.toggle("hidden");
+        });
+
+        // --- SCROLL ANIMATION SCRIPT ---
+        const animatedElements = document.querySelectorAll(".animate-on-scroll");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        animatedElements.forEach((element) => {
+            observer.observe(element);
+        });
+        
+        // --- IMAGE SLIDER SCRIPT ---
+        const slides = document.querySelectorAll('.slider-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.add('opacity-0');
+            });
+            slides[index].classList.remove('opacity-0');
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        });
+
+        // Initialize slider
+        showSlide(currentSlide);
+
+        // --- PAGE TRANSITION SCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('a');
+            links.forEach(link => {
+                link.addEventListener('click', e => {
+                    const href = link.getAttribute('href');
+                    const target = link.getAttribute('target');
+                    if (href && href.startsWith('/quiz1/') && target !== '_blank') {
+                        e.preventDefault();
+                        document.body.classList.add('fade-out');
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 500);
+                    }
+                });
+            });
         });
     </script>
 </body>
