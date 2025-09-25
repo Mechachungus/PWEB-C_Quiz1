@@ -207,7 +207,7 @@
                 link.addEventListener('click', e => {
                     const href = link.getAttribute('href');
                     const target = link.getAttribute('target');
-                    // Only apply to internal links that don't open in a new tab
+
                     if (href && href.startsWith('/quiz1/') && target !== '_blank') {
                         e.preventDefault();
                         document.body.classList.add('fade-out');

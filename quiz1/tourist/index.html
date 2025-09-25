@@ -40,7 +40,7 @@
             animation: fadeOutPage 0.5s ease-in-out forwards;
         }
 
-        /* --- EXPANDABLE CARD CSS (IMPROVED) --- */
+        /* --- EXPANDABLE CARD CSS --- */
         .tourist-card .card-content .description {
             max-height: 0;
             opacity: 0;
@@ -49,9 +49,9 @@
             margin-top: 0;
         }
         .tourist-card.expanded .card-content .description {
-            max-height: 500px; /* A large value to ensure all content is visible */
+            max-height: 500px; 
             opacity: 1;
-            margin-top: 0.5rem; /* Add space between title and text when expanded */
+            margin-top: 0.5rem; 
         }
         .tourist-card .card-image img {
             transition: transform 0.5s ease-in-out;
@@ -194,20 +194,20 @@
         const cards = document.querySelectorAll('.tourist-card');
         cards.forEach(card => {
             card.addEventListener('click', () => {
-                // Check if the clicked card is already expanded
+                // Check if expanded
                 const isExpanded = card.classList.contains('expanded');
                 
-                // First, remove 'expanded' from all cards
+                // Remove Expanded
                 cards.forEach(c => c.classList.remove('expanded'));
 
-                // If the card was not already expanded, expand it
+                // Expadn card
                 if (!isExpanded) {
                     card.classList.add('expanded');
                 }
             });
         });
 
-        // --- PAGE TRANSITION SCRIPT ---
+        // --- PAGE TRANSITION ---
         document.addEventListener('DOMContentLoaded', () => {
             const links = document.querySelectorAll('a');
             links.forEach(link => {

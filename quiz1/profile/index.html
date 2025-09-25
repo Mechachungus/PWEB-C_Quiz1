@@ -40,7 +40,7 @@
             animation: fadeOutPage 0.5s ease-in-out forwards;
         }
 
-        /* --- ACCORDION PANEL CSS (IMPROVED) --- */
+        /* --- ACCORDION PANEL CSS --- */
         .accordion-panel {
             flex: 1;
             background-size: cover;
@@ -52,18 +52,16 @@
             flex: 5;
         }
         
-        /* The overlay containing the text content */
+        /* overlay containing the text content */
         .panel-overlay {
             background-color: rgba(0, 0, 0, 0.5);
             opacity: 0;
-            /* Fades out almost instantly to prevent text wrapping */
             transition: opacity 0.1s ease-in-out;
         }
         
         /* When panel is active, the overlay becomes visible */
         .accordion-panel.active .panel-overlay {
             opacity: 1;
-            /* Fades in after a longer delay, ensuring the panel is wide enough */
             transition: opacity 0.3s ease-in-out 0.4s;
         }
 
@@ -216,9 +214,9 @@
         const panels = document.querySelectorAll('.accordion-panel');
         panels.forEach(panel => {
             panel.addEventListener('click', () => {
-                // First, remove active class from all panels
+                // remove active 
                 panels.forEach(p => p.classList.remove('active'));
-                // Then, add active class to the one that was clicked
+                // add active class to the one that was clicked
                 panel.classList.add('active');
             });
         });
