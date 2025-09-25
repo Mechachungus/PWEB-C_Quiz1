@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/", "destination": "/quiz1" }
+  ],
   "cleanUrls": true,
   "trailingSlash": false
 }
